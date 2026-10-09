@@ -3,12 +3,14 @@
   "branch": "fix/trusted-hook-launcher",
   "done_when": "Generated hooks for both hosts run installed Forge guards without executing a replaced project launcher, on setup and upgrade, while existing approval and merge checks remain unchanged",
   "kind": "fix",
-  "status": "started",
+  "round": 1,
+  "status": "working",
   "steps": [
     {
       "at": "2026-10-09T08:52:39+00:00",
       "step": "start"
     }
   ],
-  "why": "Prevent repository launcher code from running before Forge guards"
+  "why": "Prevent repository launcher code from running before Forge guards",
+  "worker": "codex"
 }
