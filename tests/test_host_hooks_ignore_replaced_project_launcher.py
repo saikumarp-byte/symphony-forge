@@ -22,7 +22,7 @@ STORY = "FIX-TRUSTED-HOOK-LAUNCHER"
 
 
 @pytest.mark.parametrize("lifecycle", ["new", "adopted-v1.2.2"])
-def test_generated_host_hooks_run_installed_guards_without_project_launcher(
+def test_1_generated_host_hooks_run_installed_guards_without_project_launcher(
         repo, gh, tmp_path, claude_payload, codex_payload, lifecycle):
     if lifecycle == "new":
         client = _new_repo(repo, gh, tmp_path)
@@ -45,6 +45,8 @@ def test_generated_host_hooks_run_installed_guards_without_project_launcher(
 
     commands = _hook_commands(client)
     assert len(commands) == 8
+    assert all("\n" not in command and "\r" not in command
+               for _, _, command in commands)
     # The helper stays for Git/Husky consumers, but is outside host command trust. Both a
     # side effect and a function override must be harmless even when every hook runs at once.
     marker = tmp_path / "project-launcher-ran"
@@ -89,7 +91,7 @@ def test_generated_host_hooks_run_installed_guards_without_project_launcher(
         assert "overridden guard" not in done.stdout + done.stderr
 
 
-def test_host_launcher_upgrade_keeps_earlier_husky_checks_reachable(repo):
+def test_2_host_launcher_upgrade_keeps_earlier_husky_checks_reachable(repo):
     # Changing the host command must not make sync treat its earlier Husky wrapper as a
     # user command: that would run a second Forge check before the team's hook body.
     repo.git("checkout", "-qb", "fix/check-host-hooks")

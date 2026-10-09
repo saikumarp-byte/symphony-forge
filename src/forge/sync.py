@@ -71,8 +71,9 @@ def command(hook: str) -> str:
     # Never source a project file here: it can change after the host trusts this command,
     # and checking its hash before sourcing would still leave a race.
     version = forge.__version__
-    bootstrap = HOST_LAUNCHER_TEXT.replace("<install>", install_line(version)).replace("<version>", version)
-    return "sh -c " + shlex.quote(bootstrap + f"\nforge hook {hook} || exit 2") + " || exit 2"
+    bootstrap = HOST_LAUNCHER_COMMAND.replace("<install>", install_line(version)).replace(
+        "<version>", version)
+    return "sh -c " + shlex.quote(bootstrap + f" forge hook {hook}") + " || exit 2"
 
 
 # Hosts embed this bootstrap, since their PATH may lack Forge's install folder (Codex does).
@@ -90,6 +91,19 @@ else
   forge() { echo "Forge isn't installed, so this hook can't run; install it with <install>, then run forge doctor." >&2; return 2; }
 fi
 """
+
+# Keep host commands on one physical line. On Windows, Python and some hosts launch command
+# strings through cmd.exe before sh; an embedded newline ends that command before the guard runs.
+HOST_LAUNCHER_COMMAND = (
+    'for folder in /usr/local/bin /opt/homebrew/bin "$HOME/.local/bin" "$XDG_BIN_HOME" '
+    '"$UV_TOOL_BIN_DIR"; do if [ -d "$folder" ]; then PATH="$folder:$PATH"; fi; done; '
+    'export PATH; if forge_path=$(command -v forge); then :; '
+    'elif uvx_path=$(command -v uvx); then '
+    'forge() { uvx -q --from git+https://github.com/knacklabs/symphony-forge@v<version> '
+    'forge "$@"; }; else '
+    'forge() { echo "Forge is not installed, so this hook cannot run; install it with <install>, '
+    'then run forge doctor."; return 2; }; fi;'
+)
 
 LAUNCHER_TEXT = HOST_LAUNCHER_TEXT + """\
 
