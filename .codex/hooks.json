@@ -5,7 +5,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh -c 'for folder in /usr/local/bin /opt/homebrew/bin \"$HOME/.local/bin\" \"$XDG_BIN_HOME\" \"$UV_TOOL_BIN_DIR\"; do if [ -d \"$folder\" ]; then PATH=\"$folder:$PATH\"; fi; done; export PATH; if forge_path=$(command -v forge); then :; elif uvx_path=$(command -v uvx); then forge() { uvx -q --from git+https://github.com/knacklabs/symphony-forge@v1.2.8 forge \"$@\"; }; else forge_error() { forge_redirect=$(printf \"\\076\\046\\062\"); eval \"echo \\\"\\$1\\\" $forge_redirect\"; }; forge() { forge_error \"Forge is not installed, so this hook cannot run; install it with uv tool install git+https://github.com/knacklabs/symphony-forge@v1.2.8, then run forge doctor.\"; return 2; }; fi; forge hook context' || exit 2"
+            "command": "sh -c 'for folder in /usr/local/bin /opt/homebrew/bin \"$HOME/.local/bin\" \"$XDG_BIN_HOME\" \"$UV_TOOL_BIN_DIR\"; do if [ -d \"$folder\" ]; then PATH=\"$folder:$PATH\"; fi; done; export PATH; if forge_path=$(command -v forge); then :; elif uvx_path=$(command -v uvx); then forge() { uvx -q --from git+https://github.com/knacklabs/symphony-forge@v1.2.8 forge \"$@\"; }; else forge_error() { forge_redirect=$(printf \"\\076\\046\\062\"); eval \"echo \\\"\\$1\\\" $forge_redirect\"; }; forge() { forge_quote=$(printf \"\\047\"); forge_error \"Forge isn${forge_quote}t installed, so this hook can${forge_quote}t run; install it with uv tool install git+https://github.com/knacklabs/symphony-forge@v1.2.8, then run forge doctor.\"; return 2; }; fi; forge hook context' || exit 2"
           }
         ]
       }
@@ -15,7 +15,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh -c 'for folder in /usr/local/bin /opt/homebrew/bin \"$HOME/.local/bin\" \"$XDG_BIN_HOME\" \"$UV_TOOL_BIN_DIR\"; do if [ -d \"$folder\" ]; then PATH=\"$folder:$PATH\"; fi; done; export PATH; if forge_path=$(command -v forge); then :; elif uvx_path=$(command -v uvx); then forge() { uvx -q --from git+https://github.com/knacklabs/symphony-forge@v1.2.8 forge \"$@\"; }; else forge_error() { forge_redirect=$(printf \"\\076\\046\\062\"); eval \"echo \\\"\\$1\\\" $forge_redirect\"; }; forge() { forge_error \"Forge is not installed, so this hook cannot run; install it with uv tool install git+https://github.com/knacklabs/symphony-forge@v1.2.8, then run forge doctor.\"; return 2; }; fi; forge hook handoff' || exit 2"
+            "command": "sh -c 'for folder in /usr/local/bin /opt/homebrew/bin \"$HOME/.local/bin\" \"$XDG_BIN_HOME\" \"$UV_TOOL_BIN_DIR\"; do if [ -d \"$folder\" ]; then PATH=\"$folder:$PATH\"; fi; done; export PATH; if forge_path=$(command -v forge); then :; elif uvx_path=$(command -v uvx); then forge() { uvx -q --from git+https://github.com/knacklabs/symphony-forge@v1.2.8 forge \"$@\"; }; else forge_error() { forge_redirect=$(printf \"\\076\\046\\062\"); eval \"echo \\\"\\$1\\\" $forge_redirect\"; }; forge() { forge_quote=$(printf \"\\047\"); forge_error \"Forge isn${forge_quote}t installed, so this hook can${forge_quote}t run; install it with uv tool install git+https://github.com/knacklabs/symphony-forge@v1.2.8, then run forge doctor.\"; return 2; }; fi; forge hook handoff' || exit 2"
           }
         ]
       }
@@ -26,7 +26,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh -c 'for folder in /usr/local/bin /opt/homebrew/bin \"$HOME/.local/bin\" \"$XDG_BIN_HOME\" \"$UV_TOOL_BIN_DIR\"; do if [ -d \"$folder\" ]; then PATH=\"$folder:$PATH\"; fi; done; export PATH; if forge_path=$(command -v forge); then :; elif uvx_path=$(command -v uvx); then forge() { uvx -q --from git+https://github.com/knacklabs/symphony-forge@v1.2.8 forge \"$@\"; }; else forge_error() { forge_redirect=$(printf \"\\076\\046\\062\"); eval \"echo \\\"\\$1\\\" $forge_redirect\"; }; forge() { forge_error \"Forge is not installed, so this hook cannot run; install it with uv tool install git+https://github.com/knacklabs/symphony-forge@v1.2.8, then run forge doctor.\"; return 2; }; fi; forge hook deny' || exit 2"
+            "command": "sh -c 'for folder in /usr/local/bin /opt/homebrew/bin \"$HOME/.local/bin\" \"$XDG_BIN_HOME\" \"$UV_TOOL_BIN_DIR\"; do if [ -d \"$folder\" ]; then PATH=\"$folder:$PATH\"; fi; done; export PATH; if forge_path=$(command -v forge); then :; elif uvx_path=$(command -v uvx); then forge() { uvx -q --from git+https://github.com/knacklabs/symphony-forge@v1.2.8 forge \"$@\"; }; else forge_error() { forge_redirect=$(printf \"\\076\\046\\062\"); eval \"echo \\\"\\$1\\\" $forge_redirect\"; }; forge() { forge_quote=$(printf \"\\047\"); forge_error \"Forge isn${forge_quote}t installed, so this hook can${forge_quote}t run; install it with uv tool install git+https://github.com/knacklabs/symphony-forge@v1.2.8, then run forge doctor.\"; return 2; }; fi; forge hook deny' || exit 2"
           }
         ]
       }
@@ -37,7 +37,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "sh -c 'for folder in /usr/local/bin /opt/homebrew/bin \"$HOME/.local/bin\" \"$XDG_BIN_HOME\" \"$UV_TOOL_BIN_DIR\"; do if [ -d \"$folder\" ]; then PATH=\"$folder:$PATH\"; fi; done; export PATH; if forge_path=$(command -v forge); then :; elif uvx_path=$(command -v uvx); then forge() { uvx -q --from git+https://github.com/knacklabs/symphony-forge@v1.2.8 forge \"$@\"; }; else forge_error() { forge_redirect=$(printf \"\\076\\046\\062\"); eval \"echo \\\"\\$1\\\" $forge_redirect\"; }; forge() { forge_error \"Forge is not installed, so this hook cannot run; install it with uv tool install git+https://github.com/knacklabs/symphony-forge@v1.2.8, then run forge doctor.\"; return 2; }; fi; forge hook approval' || exit 2"
+            "command": "sh -c 'for folder in /usr/local/bin /opt/homebrew/bin \"$HOME/.local/bin\" \"$XDG_BIN_HOME\" \"$UV_TOOL_BIN_DIR\"; do if [ -d \"$folder\" ]; then PATH=\"$folder:$PATH\"; fi; done; export PATH; if forge_path=$(command -v forge); then :; elif uvx_path=$(command -v uvx); then forge() { uvx -q --from git+https://github.com/knacklabs/symphony-forge@v1.2.8 forge \"$@\"; }; else forge_error() { forge_redirect=$(printf \"\\076\\046\\062\"); eval \"echo \\\"\\$1\\\" $forge_redirect\"; }; forge() { forge_quote=$(printf \"\\047\"); forge_error \"Forge isn${forge_quote}t installed, so this hook can${forge_quote}t run; install it with uv tool install git+https://github.com/knacklabs/symphony-forge@v1.2.8, then run forge doctor.\"; return 2; }; fi; forge hook approval' || exit 2"
           }
         ]
       }

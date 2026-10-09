@@ -130,5 +130,5 @@ def test_3_missing_installed_guard_explains_recovery_on_stderr(repo):
     missing = subprocess.run(["sh", "-c", script], capture_output=True, text=True, timeout=60)
     assert missing.returncode == 2
     assert missing.stdout == ""
-    assert missing.stderr.startswith("Forge is not installed")
+    assert missing.stderr.startswith("Forge isn't installed")
     assert "then run forge doctor" in missing.stderr

@@ -103,8 +103,9 @@ HOST_LAUNCHER_COMMAND = (
     'forge "$@"; }; else '
     'forge_error() { forge_redirect=$(printf "\\076\\046\\062"); '
     'eval "echo \\"\\$1\\" $forge_redirect"; }; '
-    'forge() { forge_error "Forge is not installed, so this hook cannot run; install it with '
-    '<install>, then run forge doctor."; return 2; }; fi;'
+    'forge() { forge_quote=$(printf "\\047"); '
+    'forge_error "Forge isn${forge_quote}t installed, so this hook can${forge_quote}t run; '
+    'install it with <install>, then run forge doctor."; return 2; }; fi;'
 )
 
 LAUNCHER_TEXT = HOST_LAUNCHER_TEXT + """\
