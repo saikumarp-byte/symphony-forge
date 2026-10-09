@@ -72,9 +72,11 @@ it defaults to `"ubuntu-latest"`. For self-hosted Linux runners, initialise with
 existing repo's fix, then run `forge sync`. New repos get it at init; earlier adopted repos get
 it after upgrading Forge and syncing. The jobs set up uv and Python, and install
 Node for Node tests, respecting version files or engines with Node 22 as the fallback.
-If the current branch's pull request checks stay queued for at least five minutes without
-starting, `forge doctor` and close's check wait name the runner setting. Make a matching runner
-available or correct the setting and sync; keep the required checks enabled.
+If the current branch's pull request checks stay queued for at least five minutes and no job
+in this repo using the configured runner has started during that queue, `forge doctor`, close
+and land name the runner setting. Make a matching runner available or correct the setting and
+sync; keep the required checks enabled. If a matching job has started, the pool is busy: close
+and land keep their normal check waits, and doctor gives no missing-runner warning.
 The `merge` setting is the owner's, because it is a gate on your own work: never change it to
 `"agent"` or run `forge merge enable`, even when the owner asks, and never merge a change to it.
 When agent merges are off and the owner wants you to merge, tell them to run `forge merge enable`
@@ -82,7 +84,10 @@ in their own terminal; it opens the change for them to merge. If an interrupted 
 contains only that setting and the default branch has moved, it rebuilds the same fix on the
 current default branch, preserving its other settings. It leaves remote work outside that fix
 alone and refuses to replace a remote branch that changes after its check. The owner still
-merges the pull request.
+merges the pull request. Close checks this generated fix mechanically instead of asking a model:
+only `forge.toml`'s top-level `merge = "agent"` may change, with all other parsed settings equal
+to the current default branch. Extra changes are refused without review. Tests and CI still run;
+every other item keeps its model review.
 
 Give status updates in one shape: `Ready to merge (n): ... · Needs you (n): ...`.
 
@@ -101,6 +106,9 @@ the local git hooks and refresh the generated files, followed by `forge doctor -
 In Husky repos, sync preserves the team's hooks and adds Forge's checks to the committed
 `.husky/pre-commit` and `.husky/pre-push`, through `.forge/hooks.sh`. Commit those additions;
 `npm install` can rebuild `.husky/_` without removing Forge's checks.
+Both hosts embed Forge's launcher in each generated hook command, so replacing the project's
+`.forge/hooks.sh` cannot run code before the installed host guards. New repos get these commands
+at init; existing repos, including earlier adoptions, get them after upgrading and syncing.
 The team's commands run first in a child shell; successful `exit` or `exec` cannot skip
 Forge, both pre-push checks receive Git's input, and a team hook failure still blocks Git.
 Resolve any remaining Doctor rows before starting work. An existing repo gets these

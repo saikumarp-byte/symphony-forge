@@ -1,0 +1,49 @@
+{
+  "base": "0c4846bcf7708270c28e49e5d539c7dff8e57763",
+  "branch": "fix/trusted-hook-launcher",
+  "done_when": "Generated hooks for both hosts run installed Forge guards without executing a replaced project launcher, on setup and upgrade, while existing approval and merge checks remain unchanged",
+  "flagged": [
+    "tests/test_host_hooks_ignore_replaced_project_launcher.py"
+  ],
+  "kind": "fix",
+  "review": {
+    "blocking_level": "P1",
+    "branch_diff": "6b210134dcc5bcd9fc95a0b5a36dac055dd4d462e84048a69a36cad57e85724b",
+    "changed": "be826ceab5995b32739805d7f8ad60e877289ca09002b27e078fe87eca21f40a",
+    "commit": "0a438370ed3843fb63fe38ca88fe34766f346896",
+    "dismissals": [],
+    "findings": [],
+    "id": "4c21a92d-3dd1-4986-a499-aedfe00f59c3",
+    "status": "clean"
+  },
+  "round": 1,
+  "status": "waiting for checks",
+  "steps": [
+    {
+      "at": "2026-10-09T08:52:39+00:00",
+      "step": "start"
+    },
+    {
+      "at": "2026-10-09T09:38:08+00:00",
+      "step": "review"
+    },
+    {
+      "at": "2026-10-09T10:21:23+00:00",
+      "step": "review"
+    },
+    {
+      "at": "2026-10-09T10:26:13+00:00",
+      "step": "review"
+    },
+    {
+      "at": "2026-10-09T10:36:14+00:00",
+      "step": "review"
+    },
+    {
+      "at": "2026-10-09T10:51:41+00:00",
+      "step": "review"
+    }
+  ],
+  "why": "Prevent repository launcher code from running before Forge guards",
+  "worker": "codex"
+}
