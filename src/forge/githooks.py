@@ -88,7 +88,9 @@ def ships(top: Path, cfg: dict[str, Any]) -> dict[str, str]:
             current = sync.read(path)
             command = (f'. "$(git rev-parse --show-toplevel)/{sync.LAUNCHER}" && '
                        f'forge_husky "$0" {hook} <start> "$@"; exit $?')
-            owned = {sync.command(hook), *(command.replace("<start>", str(start)) for start in (2, 3))}
+            legacy = (f"sh -c '. \"$(git rev-parse --show-toplevel)/{sync.LAUNCHER}\" && "
+                      f"forge hook {hook} || exit 2' || exit 2")
+            owned = {legacy, *(command.replace("<start>", str(start)) for start in (2, 3))}
             lines = [line for line in current.splitlines(keepends=True) if line.rstrip("\r\n") not in owned]
             header = lines.pop(0).rstrip("\n") + "\n" if lines and lines[0].startswith("#!") else ""
             check = command.replace("<start>", "3" if header else "2") + "\n"
