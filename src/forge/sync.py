@@ -101,8 +101,10 @@ HOST_LAUNCHER_COMMAND = (
     'elif uvx_path=$(command -v uvx); then '
     'forge() { uvx -q --from git+https://github.com/knacklabs/symphony-forge@v<version> '
     'forge "$@"; }; else '
-    'forge() { echo "Forge is not installed, so this hook cannot run; install it with <install>, '
-    'then run forge doctor."; return 2; }; fi;'
+    'forge_error() { forge_redirect=$(printf "\\076\\046\\062"); '
+    'eval "echo \\"\\$1\\" $forge_redirect"; }; '
+    'forge() { forge_error "Forge is not installed, so this hook cannot run; install it with '
+    '<install>, then run forge doctor."; return 2; }; fi;'
 )
 
 LAUNCHER_TEXT = HOST_LAUNCHER_TEXT + """\

@@ -8,6 +8,7 @@ sequential hook short-circuit. It needs no production test seam.
 from __future__ import annotations
 
 import json
+import shlex
 import shutil
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
@@ -114,3 +115,20 @@ def test_2_host_launcher_upgrade_keeps_earlier_husky_checks_reachable(repo):
                               capture_output=True, text=True, timeout=60)
         assert done.stdout == f"team-{hook}\n"
         assert done.returncode != 0 and reason in done.stderr
+
+
+def test_3_missing_installed_guard_explains_recovery_on_stderr(repo):
+    repo.git("checkout", "-qb", "fix/check-missing-host-guard")
+    repo.write("forge.toml", f'version = "{_version(repo)}"\n')
+    synced = repo.forge("sync")
+    assert synced.returncode == 0, synced.stdout + synced.stderr
+    command = _hook_commands(repo.path)[0][2]
+    script = shlex.split(command)[2]
+    # Select the generated no-install fallback without depending on this machine's PATH.
+    script = script.replace("if forge_path=$(command -v forge);", "if false;")
+    script = script.replace("elif uvx_path=$(command -v uvx);", "elif false;")
+    missing = subprocess.run(["sh", "-c", script], capture_output=True, text=True, timeout=60)
+    assert missing.returncode == 2
+    assert missing.stdout == ""
+    assert missing.stderr.startswith("Forge is not installed")
+    assert "then run forge doctor" in missing.stderr
