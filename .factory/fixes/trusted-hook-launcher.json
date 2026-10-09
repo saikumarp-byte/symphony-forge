@@ -2,20 +2,30 @@
   "base": "0c4846bcf7708270c28e49e5d539c7dff8e57763",
   "branch": "fix/trusted-hook-launcher",
   "done_when": "Generated hooks for both hosts run installed Forge guards without executing a replaced project launcher, on setup and upgrade, while existing approval and merge checks remain unchanged",
-  "flagged": [],
+  "flagged": [
+    "tests/test_host_hooks_ignore_replaced_project_launcher.py"
+  ],
   "kind": "fix",
   "review": {
     "blocking_level": "P1",
-    "branch_diff": "04f5fe96e263defa627ca3505065d9b1b111b5cbaeec58191df186544d3d55e3",
-    "changed": "6a6963a7b6a1d458933b1f91a8cc1c21886c2d0fd92e1bb4180fd48e8ebfa067",
-    "commit": "ae67ee0b497964fff01f876bf90327f39d5b4694",
+    "branch_diff": "f0aeb5def7ac642ddfc3e659a7caba0db7a52e1bd27df6b8294e7306cff9e34b",
+    "changed": "b0538a2c0ae4ba7e47f2b5b5903fdb44ef6ca3c964140ca4a3c5d9e44f50422a",
+    "commit": "9852c604c4c6fba4fa214a4f4880c6eb588913f0",
     "dismissals": [],
-    "findings": [],
-    "id": "686f980f-a608-4942-af4a-962874a1a551",
-    "status": "clean"
+    "findings": [
+      {
+        "body": "The supplied latest-commit proof list is missing. Add entries mapping every Done-when detail to its named proof: generated hooks for both hosts bypass the replaced launcher, new setup and earlier-adoption upgrades receive them, and approval and merge checks retain their behavior. The passing close run supplies test results but does not replace the explicitly required proof list.",
+        "file": "tests/test_host_hooks_ignore_replaced_project_launcher.py",
+        "line": 24,
+        "priority": "P1",
+        "title": "Not done: proof list"
+      }
+    ],
+    "id": "b41fa697-8b64-4b73-83e2-8fb4d430d538",
+    "status": "blocked"
   },
   "round": 1,
-  "status": "waiting for checks",
+  "status": "fixing",
   "steps": [
     {
       "at": "2026-10-09T08:52:39+00:00",
@@ -23,6 +33,10 @@
     },
     {
       "at": "2026-10-09T09:38:08+00:00",
+      "step": "review"
+    },
+    {
+      "at": "2026-10-09T10:21:23+00:00",
       "step": "review"
     }
   ],
