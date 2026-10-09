@@ -2784,6 +2784,17 @@
       "closed_by": null
     },
     {
+      "key": "edge\tsrc/forge/sync.py\t[P2] Write the missing-installation diagnostic to stderr",
+      "kind": "edge",
+      "path": "src/forge/sync.py",
+      "line": 107,
+      "text": "[P2] Write the missing-installation diagnostic to stderr",
+      "from": "review",
+      "item": "trusted-hook-launcher",
+      "status": "open",
+      "closed_by": null
+    },
+    {
       "key": "edge\tsrc/forge/templates/review-tests.py\tAllow review commits to remove stale test-failure output",
       "kind": "edge",
       "path": "src/forge/templates/review-tests.py",
