@@ -8,20 +8,12 @@
   "kind": "fix",
   "review": {
     "blocking_level": "P1",
-    "branch_diff": "7559519fddb60f4892a420b27be41f02864bcb5433a6f39c2f16b6997275bbe6",
-    "changed": "b0538a2c0ae4ba7e47f2b5b5903fdb44ef6ca3c964140ca4a3c5d9e44f50422a",
-    "commit": "ad6d041df9560a1db1636456044b9c062e5b09a5",
+    "branch_diff": "f98e4a41e3932f9ee6bd642131ac25d56758097ef543540da292b692de10859c",
+    "changed": "951d18a23aa1c113507daee0c175506811bbbae0d4341d134ff913f63786f61c",
+    "commit": "1a6adbf3d9c80baa80a7fd8a614655b993b051c4",
     "dismissals": [],
-    "findings": [
-      {
-        "body": "When neither Forge nor uvx is available, the new embedded bootstrap prints its installation instructions to stdout and exits 2. The previous launcher sent this diagnostic to stderr. Claude uses stderr as the blocking reason for non-JSON hooks, so its generated hooks now block without showing the explanation or recovery command ([hook contract](https://code.claude.com/docs/en/hooks#exit-code-2)). Restore `>&2` in the shared bootstrap; it generates all four commands for each host.",
-        "file": "src/forge/sync.py",
-        "line": 107,
-        "priority": "P2",
-        "title": "[P2] Write the missing-installation diagnostic to stderr"
-      }
-    ],
-    "id": "1eec9061-4e79-4879-9b39-86c9d01c10c8",
+    "findings": [],
+    "id": "78390d4e-7e8f-44ab-982b-6b1e9ec4fd91",
     "status": "clean"
   },
   "round": 1,
@@ -41,6 +33,10 @@
     },
     {
       "at": "2026-10-09T10:26:13+00:00",
+      "step": "review"
+    },
+    {
+      "at": "2026-10-09T10:36:14+00:00",
       "step": "review"
     }
   ],
